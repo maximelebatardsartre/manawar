@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manawar: Last Stand Edition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Special+Elite&family=Black+Ops+One&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              army: {
+                dark: '#0a140d', // Darker for better contrast
+                DEFAULT: '#1a2f23',
+                light: '#2a4232'
+              },
+              beige: {
+                DEFAULT: '#e6dec5', // Much lighter for better readability
+                dim: '#a39a85'
+              },
+              steel: '#5a5a5a', // Slightly lighter steel
+              radar: '#00ff91',
+              alert: '#ff3333' // Brighter alert red
+            },
+            fontFamily: {
+              mono: ['"Share Tech Mono"', 'monospace'],
+              typewriter: ['"Special Elite"', 'monospace'],
+              stencil: ['"Black Ops One"', 'cursive'],
+            },
+            backgroundImage: {
+              'paper-pattern': "url('https://www.transparenttextures.com/patterns/aged-paper.png')",
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        background-color: #0a140d;
+        color: #e6dec5;
+        overflow-x: hidden;
+      }
+      
+      /* CRT Scanline Effect */
+      .scanlines {
+        background: linear-gradient(
+          to bottom,
+          rgba(255,255,255,0),
+          rgba(255,255,255,0) 50%,
+          rgba(0,0,0,0.2) 50%,
+          rgba(0,0,0,0.2)
+        );
+        background-size: 100% 4px;
+        position: fixed;
+        top: 0; 
+        left: 0;
+        right: 0; 
+        bottom: 0;
+        pointer-events: none;
+        z-index: 50;
+        opacity: 0.6;
+      }
+
+      .flicker {
+        animation: flicker 0.15s infinite;
+      }
+
+      @keyframes flicker {
+        0% { opacity: 0.95; }
+        100% { opacity: 1; }
+      }
+
+      /* Radar Sweep Animation */
+      @keyframes radar-spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      .radar-sweep {
+        animation: radar-spin 4s linear infinite;
+      }
+
+      /* Glitch Effect */
+      .glitch-text:hover {
+        animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+        color: #00ff91;
+      }
+      @keyframes glitch {
+        0% { transform: translate(0) }
+        20% { transform: translate(-2px, 2px) }
+        40% { transform: translate(-2px, -2px) }
+        60% { transform: translate(2px, 2px) }
+        80% { transform: translate(2px, -2px) }
+        100% { transform: translate(0) }
+      }
+
+      /* Typewriter Cursor */
+      .typewriter::after {
+        content: '_';
+        animation: blink 1s step-end infinite;
+      }
+      @keyframes blink { 50% { opacity: 0; } }
+      
+      /* Scrollbar */
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0a140d; 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #444444; 
+        border: 1px solid #e6dec5;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #e6dec5; 
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "framer-motion": "https://esm.sh/framer-motion@^12.29.2",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.563.0",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.13.0",
+    "react-dom": "https://esm.sh/react-dom@^19.2.4",
+    "vite": "https://esm.sh/vite@^7.3.1",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+    <div class="scanlines"></div>
+    <!-- Point d'entrée pour Vite -->
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
